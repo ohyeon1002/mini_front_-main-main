@@ -34,7 +34,7 @@ export default function NewsPage() {
   return (
     <div className="min-h-screen w-screen bg-gradient-to-b from-gray-200 to-white overflow-x-hidden">
 
-      <main className="w-full  from-gray-100 to-white flex flex-col items-center px-4 py-10">
+      <main className="w-full  from-gray-200 to-white flex flex-col items-center px-4 py-10">
         {/*  검색창 */}
         <section className="w-full max-w-lg mb-6">
           <form
