@@ -54,7 +54,7 @@ export default function SearchResultPage({ uriEncodedString }: { uriEncodedStrin
               </div>
             </div>
             <SearchHistoryFetcher
-                pages={pages} activeIndex={0} setActiveIndex={function (index: number): void {
+                pages={pages} activeIndex={0} setActiveIndex={function (_index: number): void {
                   throw new Error("Function not implemented.");
                 } }              //activeIndex={activeIndex}
               //setActiveIndex={setActiveIndex}

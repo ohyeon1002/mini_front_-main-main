@@ -82,19 +82,15 @@ export default function NewsFetcher({ uriEncodedString, pageSetter }: newsFetche
       }),
     });
 
-    const data: searchHistory[] = await response.json();
-
-    const patched = data.map((item) => ({
-      ...item,
-      timestamp: item.timestamp || new Date().toISOString(),
-    }));
-
-    
-    if (pageSetter) pageSetter(patched);
-  } catch (err) {
-    console.error("백엔드 저장 실패:", err);
-  }
+  const data: searchHistory[] = await response.json();
+  console.log("백엔드 저장 성공:", data);
+  // You can use the data or call pageSetter if needed
+  if (pageSetter) pageSetter(data);
+} catch (err) {
+  console.error("백엔드 저장 실패:", err);
+}
 };
+
 
 
   return (

@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 import LoginForm from "./signcomponents/Login";
 import SignupForm from "./signcomponents/SignupForm";
 import NewsPage from "./newsfetchingcomponents/NewsPage";
-import SearchResultPageWrapper from "./pages/SearchResultPageWrapper";
+
 import MainPage from "./MainPage";
 import Scrap from "./pages/Scrap";
 
@@ -17,7 +17,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<MainPage />} />  
             <Route path="/news" element={<NewsPage />} />
-            <Route path="/search" element={<SearchResultPageWrapper />} /> 
+
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<SignupForm />} />
              <Route path="/scrap" element={<Scrap />} />
