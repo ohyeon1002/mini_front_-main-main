@@ -1,3 +1,4 @@
+// src/newsfetchingcomponents/SearchHistoryFetcher.tsx
 import { useEffect, useRef, useState } from "react";
 import NewsCard from "./NewsCard";
 import AliceCarousel from "react-alice-carousel";
@@ -20,16 +21,14 @@ interface Props {
 }
 
 export default function SearchHistoryFetcher({ pages, activeIndex, setActiveIndex }: Props) {
-  console.log(pages);
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
-
   const [dataCache, setDataCache] = useState<{ [pageId: string]: HistoryItem[] }>({});
   const [isLoading, setIsLoading] = useState(false);
   const carouselRef = useRef<AliceCarousel>(null);
 
-  // ⛳ Fetch when index changes
+  // fetch 데이터 when index changes
   useEffect(() => {
     if (!token || pages.length === 0) return;
     const currentPage = pages[activeIndex];
@@ -62,7 +61,6 @@ export default function SearchHistoryFetcher({ pages, activeIndex, setActiveInde
     fetchHistory();
   }, [activeIndex, pages, token]);
 
- 
   useEffect(() => {
     carouselRef.current?.slideTo(activeIndex);
   }, [activeIndex]);
@@ -94,14 +92,15 @@ export default function SearchHistoryFetcher({ pages, activeIndex, setActiveInde
   }
 
   const carouselItems = pages.map((page, idx) => {
-    const pageData = dataCache[page.id];
+    const pageData = dataCache[page.id] || [];
+
     return (
       <div key={page.id} className="w-full p-2">
         {isLoading && idx === activeIndex ? (
           <div className="text-center text-gray-400 italic">불러오는 중...</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {(pageData || []).map((item) => (
+            {pageData.map((item) => (
               <NewsCard key={item.link} data={item} />
             ))}
           </div>

@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 // 뉴스 아이템 타입 정의
 interface newsHistory {
@@ -11,6 +15,7 @@ interface newsHistory {
 }
 
 export default function Scrap() {
+  const navigate = useNavigate();
   const [news, setNews] = useState<newsHistory[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -75,16 +80,20 @@ export default function Scrap() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
+      <div className="mb-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+        >
+          ← 뒤로가기
+        </button>
+      </div>
+
       <h2 className="text-2xl font-bold text-gray-800 mb-6">
         ❤️ 내가 스크랩한 뉴스
       </h2>
 
-      {loading && <p className="text-gray-500">불러오는 중...</p>}
-      {error && (
-        <div className="bg-white border border-red-200 rounded-lg p-4 shadow text-red-500">
-          {error}
-        </div>
-      )}
+      {"}"}  
       {!loading && !error && news.length === 0 && (
         <p className="text-gray-400">스크랩한 뉴스가 없습니다.</p>
       )}
@@ -121,3 +130,16 @@ export default function Scrap() {
     </div>
   );
 }
+
+/*
+import { useNavigate } from "react-router-dom";
+
+const navigate = useNavigate();
+
+<button
+  onClick={() => navigate(-1)}
+  className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+>
+  ← 뒤로가기
+</button>
+*/

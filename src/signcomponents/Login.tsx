@@ -23,7 +23,7 @@ export default function LoginForm() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.userId);
       alert("로그인 성공");
-      navigate("/news"); // 원하는 페이지로 이동
+      navigate("/");  // 
     } else {
       alert("로그인 실패: 아이디 또는 비밀번호를 확인하세요.");
     }

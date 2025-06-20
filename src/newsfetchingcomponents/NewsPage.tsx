@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import NewsFetcher from "../newsfetchingcomponents/NewsFetcher";
-import SearchHistoryFetcher from"../newsfetchingcomponents/SearchHistoryFetcher";
+import SearchHistoryFetcher from "../newsfetchingcomponents/SearchHistoryFetcher";
 import type { searchHistory } from "../newsfetchingcomponents/NewsFetcher";
 
 export default function NewsPage() {
@@ -79,38 +79,43 @@ export default function NewsPage() {
 
             {/*  이전 검색 기록 */}
             {showHistory && userId && (
-  <div className="bg-white p-6 rounded-xl shadow-md">
-    <div className="flex items-center justify-between mb-4 border-b pb-2">
-      <h2 className="text-xl font-semibold text-gray-800">🕘 이전 검색 기록</h2>
-      <div className="flex items-center gap-2">
-        <button
-          onClick={slidePrev}
-          className="text-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50"
-          disabled={activeIndex === 0}
-        >
-          이전
-        </button>
-        <span className="text-sm text-gray-500">
-          {pages[activeIndex]?.timestamp || ""}
-        </span>
-        <button
-          onClick={slideNext}
-          className="text-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50"
-          disabled={activeIndex === pages.length - 1}
-        >
-          다음
-        </button>
-      </div>
-    </div>
-    
-    
-<SearchHistoryFetcher
-  pages={pages}
-  activeIndex={activeIndex}
-  setActiveIndex={setActiveIndex}
-/>
+              <div className="bg-white p-6 rounded-xl shadow-md">
+                <div className="flex items-center justify-between mb-4 border-b pb-2">
+                  <h2 className="text-xl font-semibold text-gray-800">🕘 이전 검색 기록</h2>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={slidePrev}
+                      className={`text-sm px-3 py-1 bg-gray-200 rounded transition ${activeIndex === 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
+                        }`}
+                      disabled={activeIndex === 0}
+                    >
+                      이전
+                    </button>
 
-  </div>
+                    <span className="text-sm text-gray-500">
+                      {pages[activeIndex]?.timestamp || ""}
+                    </span>
+
+                    <button
+                      onClick={slideNext}
+                      className={`text-sm px-3 py-1 bg-gray-200 rounded transition ${activeIndex === pages.length - 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
+                        }`}
+                      disabled={activeIndex === pages.length - 1}
+                    >
+                      다음
+                    </button>
+                  </div>
+
+                </div>
+
+
+                <SearchHistoryFetcher
+                  pages={pages}
+                  activeIndex={activeIndex}
+                  setActiveIndex={setActiveIndex}
+                />
+
+              </div>
             )}
           </section>
         ) : (
