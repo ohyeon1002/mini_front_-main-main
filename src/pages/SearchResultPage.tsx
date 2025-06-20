@@ -29,7 +29,7 @@ export default function SearchResultPage({ uriEncodedString }: { uriEncodedStrin
         <NewsFetcher uriEncodedString={uriEncodedString} pageSetter={setPages} />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* 📜 이전 검색 기록 */}
+          {/*  이전 검색 기록 */}
           <div className="bg-white p-5 rounded-xl shadow-md">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold text-gray-700">📜 이전 검색 기록</h2>
@@ -61,7 +61,7 @@ export default function SearchResultPage({ uriEncodedString }: { uriEncodedStrin
             />
           </div>
 
-          {/* 📌 현재 검색 결과 */}
+          {/*  현재 검색 결과 */}
           <div className="bg-white p-5 rounded-xl shadow-md">
             <h2 className="text-xl font-semibold text-gray-700 mb-3">📌 현재 검색 결과</h2>
             <NewsFetcher uriEncodedString={uriEncodedString} pageSetter={setPages} />

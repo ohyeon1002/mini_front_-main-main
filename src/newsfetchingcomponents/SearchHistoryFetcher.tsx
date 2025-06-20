@@ -62,7 +62,7 @@ export default function SearchHistoryFetcher({ pages, activeIndex, setActiveInde
     fetchHistory();
   }, [activeIndex, pages, token]);
 
-  // 🚨 important: force carousel to match current index
+ 
   useEffect(() => {
     carouselRef.current?.slideTo(activeIndex);
   }, [activeIndex]);
