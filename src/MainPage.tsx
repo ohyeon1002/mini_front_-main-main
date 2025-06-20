@@ -36,27 +36,28 @@ const features = [
 
 export default function MainPage() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // useNavigate 훅을 사용하여 검색어로 이동
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); 
     const query = inputRef.current?.value.trim();
     if (query) {
       navigate(`/news?query=${encodeURIComponent(query)}`);
+      // useRef로 입력값을 받고 useNavigate 훅으로 /news?query=검색어로 이동.
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b w-full from-gray-200 to-white py-20 px-4 flex flex-col items-center">
       <motion.h1
-  initial={{ opacity: 0, y: -30 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
-  className="text-3xl font-bold text-gray-800 mb-6"
->
-  🔍 뉴스 검색어를 입력하세요
-</motion.h1>
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl font-bold text-gray-800 mb-6"
+      >
+        🔍 뉴스 검색어를 입력하세요
+      </motion.h1>
 
       <form
         onSubmit={handleSearch}
@@ -78,10 +79,11 @@ export default function MainPage() {
 
       {/* 설명 카드들 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full mb-10">
+        {/* Tailwind로 색상 및 레이아웃 설정, hover 시 살짝 커지는 scale애니메이션 적용.*/}
         {features.map((item, idx) => (
           <motion.div
             key={idx}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.15 }}
             onMouseEnter={() => setHoveredIndex(idx)}
             onMouseLeave={() => setHoveredIndex(null)}
             className={`${item.color} rounded-2xl shadow p-6 transition cursor-default`}
@@ -94,37 +96,19 @@ export default function MainPage() {
 
       {/* 아래 캡처 이미지 영역 */}
       <div className="w-full flex justify-center items-center min-h-[280px]">
-  {hoveredIndex !== null && (
-    <motion.img
-      key={hoveredIndex}
-      src={features[hoveredIndex].img}
-      alt={`${features[hoveredIndex].title} 미리보기`}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      className="rounded-xl shadow-xl max-h-[480px] w-auto object-contain border border-gray-300"
-    />
-  )}
-</div>
+        {hoveredIndex !== null && (
+          <motion.img
+            key={hoveredIndex}
+            src={features[hoveredIndex].img}
+            alt={`${features[hoveredIndex].title} 미리보기`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+
+            transition={{ duration: 0.3 }}
+            className="rounded-xl shadow-xl max-h-[480px] w-auto object-contain border border-gray-300"
+          />
+        )}
+      </div>
     </div>
   );
 }
-
-/*
-<div className="w-full flex justify-center items-center min-h-[280px]">
-  {hoveredIndex !== null && (
-    <motion.img
-      key={hoveredIndex}
-      src={features[hoveredIndex].img}
-      alt={`${features[hoveredIndex].title} 미리보기`}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      className="rounded-xl shadow-xl max-h-[480px] w-auto object-contain border border-gray-300"
-    />
-  )}
-</div>
-
-*/
