@@ -93,7 +93,7 @@ export default function Scrap() {
         ❤️ 내가 스크랩한 뉴스
       </h2>
 
-      {"}"}  
+      
       {!loading && !error && news.length === 0 && (
         <p className="text-gray-400">스크랩한 뉴스가 없습니다.</p>
       )}

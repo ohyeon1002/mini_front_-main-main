@@ -10,7 +10,7 @@ import Scrap from "./pages/Scrap";
 
 export default function App() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen  from-gray-200 to-white ">
       <BrowserRouter>
         <Header />
         <main className="flex-grow flex justify-center items-center">

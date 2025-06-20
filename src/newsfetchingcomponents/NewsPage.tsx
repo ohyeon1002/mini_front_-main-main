@@ -32,7 +32,7 @@ export default function NewsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100flex flex-col">
+    <div className="min-h-screen   from-gray-200 to-white flex flex-col">
       <main className="w-full flex flex-col items-center px-4 py-10">
         {/*  검색창 */}
         <section className="w-full max-w-lg mb-6">
