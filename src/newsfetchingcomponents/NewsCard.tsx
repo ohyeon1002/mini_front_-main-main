@@ -138,8 +138,10 @@ export default function NewsCard({ data }: dataProps) {
     checkScrap();
   }, [data.link]);
 
-  return (
-    <div className="bg-white shadow-md rounded-lg p-4 m-2 hover:scale-105 transition-transform duration-200 relative">
+ return (
+  <div className="bg-white shadow-md rounded-lg p-4 m-2 flex flex-col justify-between h-full">
+    {/* 상단 내용 영역 */}
+    <div>
       <h2 className="text-lg font-semibold text-gray-800 mb-2">
         <a
           href={data.originallink || data.link}
@@ -147,34 +149,12 @@ export default function NewsCard({ data }: dataProps) {
           rel="noopener noreferrer"
           className="hover:text-blue-600 underline"
         >
-          {data.title
-            .replace(/<b>/g, "")
-            .replace(/<\/b>/g, "")
-            .replace(/&quot;/g, '"')}
+          {data.title.replace(/<b>/g, "").replace(/<\/b>/g, "").replace(/&quot;/g, '"')}
         </a>
       </h2>
-      <p className="text-sm text-gray-500">{data.pubDate}</p>
+      <p className="text-sm text-gray-500 mb-2">{data.pubDate}</p>
 
-      <div className="flex gap-2 mt-3">
-        <button
-          onClick={summarizeHandler}
-          className="text-sm bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
-        >
-          요약 보기
-        </button>
-        {(summary || error) && (
-          <button
-            onClick={() => {
-              setSummary(null);
-              setError(null); // 에러도 같이 초기화
-            }}
-            className="text-sm bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400 transition"
-          >
-            요약 닫기
-          </button>
-        )}
-      </div>
-
+      {/* 요약 결과 */}
       {loading && <p className="text-sm text-gray-500 mt-2">요약 중...</p>}
       {error && (
         <div className="mt-2 text-sm text-red-500">
@@ -191,20 +171,44 @@ export default function NewsCard({ data }: dataProps) {
           </div>
         </div>
       )}
-
       {summary && (
-        <div className="mt-2 p-2 bg-gray-100 rounded text-sm text-gray-800">
+        <div className="mt-2 p-2 bg-gray-100 rounded text-sm text-gray-800 whitespace-pre-line">
           <strong>요약:</strong> {summary}
         </div>
       )}
+    </div>
 
+    {/* 하단 버튼 영역 */}
+    <div className="mt-4 flex justify-between items-center">
+      <div className="flex gap-2">
+        <button
+          onClick={summarizeHandler}
+          className="text-sm bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
+        >
+          요약 보기
+        </button>
+        {(summary || error) && (
+          <button
+            onClick={() => {
+              setSummary(null);
+              setError(null);
+            }}
+            className="text-sm bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400 transition"
+          >
+            요약 닫기
+          </button>
+        )}
+      </div>
+
+      {/* 하트 버튼 */}
       <button
         onClick={scrapHandler}
-        className="text-2xl absolute bottom-2 right-2 hover:scale-110 transition"
+        className="text-xl hover:scale-110 transition"
         title={scraped ? "스크랩 해제" : "스크랩"}
       >
         {scraped ? "❤️" : "🤍"}
       </button>
     </div>
-  );
+  </div>
+);
 }
