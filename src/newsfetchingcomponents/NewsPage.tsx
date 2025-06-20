@@ -73,7 +73,7 @@ export default function NewsPage() {
           <section className={`w-full ${showHistory ? "grid-cols-2" : "grid-cols-1"} grid gap-8 px-4 max-w-screen-2xl`}>
             {/*  현재 검색 결과 */}
             <div className="bg-white p-6 rounded-xl shadow-md">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">📌 현재 검색 결과</h2>
+              <h2 className="text-xl font-semibold text-gray-800 mb-4 border-b pb-2"> 현재 검색 결과</h2>
               <NewsFetcher uriEncodedString={encodeURIComponent(queryFromURL)} pageSetter={setPages} />
             </div>
 
@@ -81,7 +81,7 @@ export default function NewsPage() {
             {showHistory && userId && (
               <div className="bg-white p-6 rounded-xl shadow-md">
                 <div className="flex items-center justify-between mb-4 border-b pb-2">
-                  <h2 className="text-xl font-semibold text-gray-800">🕘 이전 검색 기록</h2>
+                  <h2 className="text-xl font-semibold text-gray-800"> 이전 검색 기록</h2>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={slidePrev}
@@ -93,8 +93,17 @@ export default function NewsPage() {
                     </button>
 
                     <span className="text-sm text-gray-500">
-                      {pages[activeIndex]?.timestamp || ""}
+                      {pages[activeIndex]?.timestamp
+                        ? new Date(pages[activeIndex].timestamp).toLocaleString("ko-KR", {
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
+                        : ""}
                     </span>
+
 
                     <button
                       onClick={slideNext}
