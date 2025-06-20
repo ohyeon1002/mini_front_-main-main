@@ -32,8 +32,9 @@ export default function NewsPage() {
   };
 
   return (
-    <div className="min-h-screen   from-gray-200 to-white flex flex-col">
-      <main className="w-full flex flex-col items-center px-4 py-10">
+    <div className="min-h-screen w-screen bg-gradient-to-b from-gray-200 to-white overflow-x-hidden">
+
+      <main className="w-full  from-gray-200 to-white flex flex-col items-center px-4 py-10">
         {/*  검색창 */}
         <section className="w-full max-w-lg mb-6">
           <form
@@ -42,7 +43,7 @@ export default function NewsPage() {
           >
             <input
               type="text"
-              className="flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="flex-grow px-4 py-2 border  from-gray-200 to-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="🔍 뉴스 검색어를 입력하세요"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
