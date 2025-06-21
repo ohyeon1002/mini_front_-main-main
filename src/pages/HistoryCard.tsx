@@ -49,9 +49,7 @@ export default function HistoryCard({ uriEncodedString }: { uriEncodedString: st
               </div>
             </div>
             <SearchHistoryFetcher
-                pages={pages} activeIndex={0} setActiveIndex={function (index: number): void {
-                  throw new Error("Function not implemented.");
-                } }             
+                pages={pages} activeIndex={0} setActiveIndex={setActiveIndex}             
             />
           </div>
 
