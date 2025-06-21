@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const apiurl = import.meta.env.VITE_API_URL;
 
 
 
@@ -32,7 +33,7 @@ export default function Scrap() {
 
     try {
       const resp = await fetch(
-        `http://10.125.121.190:8080/api/liked?username=${userId}`,
+        `${apiurl}/api/liked?username=${userId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -55,7 +56,7 @@ export default function Scrap() {
     if (!userId || !token) return;
     try {
       const res = await fetch(
-        `http://10.125.121.190:8080/api/liked?username=${userId}&link=${encodeURIComponent(link)}`,
+        `${apiurl}/api/liked?username=${userId}&link=${encodeURIComponent(link)}`,
         {
           method: "DELETE",
           headers: {

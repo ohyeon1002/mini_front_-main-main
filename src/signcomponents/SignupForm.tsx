@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const apiurl = import.meta.env.VITE_API_URL;
 
 export default function SignupForm() {
   const [username, setUsername] = useState("");
@@ -20,7 +21,7 @@ export default function SignupForm() {
     }
 
     try {
-      const res = await fetch("http://10.125.121.190:8080/api/public/signup", {
+      const res = await fetch(`${apiurl}/api/public/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),

@@ -4,6 +4,7 @@ import { type newsInfo } from "./NewsFetcher";
 interface dataProps {
   data: newsInfo;
 }
+const apiurl = import.meta.env.VITE_API_URL;
 
 export default function NewsCard({ data }: dataProps) {
   const [summary, setSummary] = useState<string | null>(null);
@@ -67,7 +68,7 @@ export default function NewsCard({ data }: dataProps) {
         if (!summaryRes.ok) throw new Error("요약 실패");
         const summaryData = await summaryRes.json();
 
-        const res = await fetch("http://10.125.121.190:8080/api/liked", {
+        const res = await fetch(`${apiurl}/api/liked`, {
           method: "POST",
           headers: { "Content-Type": "application/json", Authorization: token },
           body: JSON.stringify({
@@ -87,7 +88,7 @@ export default function NewsCard({ data }: dataProps) {
         }
       } else {
         const res = await fetch(
-          `http://10.125.121.190:8080/api/liked?username=${userId}&link=${encodeURIComponent(data.link)}`,
+          `${apiurl}/api/liked?username=${userId}&link=${encodeURIComponent(data.link)}`,
           {
             method: "DELETE",
             headers: {
@@ -116,7 +117,7 @@ export default function NewsCard({ data }: dataProps) {
     const checkScrap = async () => {
       try {
         const res = await fetch(
-          `http://10.125.121.190:8080/api/liked/check?username=${encodeURIComponent(
+          `${apiurl}/api/liked/check?username=${encodeURIComponent(
             userId
           )}&link=${encodeURIComponent(data.link)}`,
           {

@@ -6,6 +6,9 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { useNavigate } from "react-router-dom";
 import type { searchHistory } from "./NewsFetcher";
 
+const apiurl = import.meta.env.VITE_API_URL;
+
+
 interface HistoryItem {
   title: string;
   originallink: string;
@@ -37,7 +40,7 @@ export default function SearchHistoryFetcher({ pages, activeIndex, setActiveInde
     const fetchHistory = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch(`http://10.125.121.190:8080/api/history?id=${currentPage.id}`, {
+        const res = await fetch(`${apiurl}/api/history?id=${currentPage.id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: token,

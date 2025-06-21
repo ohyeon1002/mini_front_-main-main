@@ -6,6 +6,7 @@ export interface newsFetcherProps {
   uriEncodedString: string;
   pageSetter?: (pages: searchHistory[]) => void;
 }
+const apiurl = import.meta.env.VITE_API_URL;
 
 export type newsInfo = {
   title: string;
@@ -69,7 +70,7 @@ export default function NewsFetcher({ uriEncodedString, pageSetter }: newsFetche
   if (!userId || !token) return;
 
   try {
-    const response = await fetch("http://10.125.121.190:8080/api/history", {
+    const response = await fetch(`${apiurl}/api/history`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
