@@ -59,14 +59,16 @@ const summarize = async (article) => {
   try {
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: `Summarize the core point of the following news article in Korean in about 200 characters: ${article} \n If the article wasn't given, please let us know as '추출 잘못된듯? ㅋㅋ'`,
+      contents: `Summarize the core point of the following news article in Korean in about 200 characters: ${article} \n If the article wasn't given, please let us know by returning 'SomethingsGoneWrongException'`,
       config: {
         thinkingConfig: {
           thinkingBudget: 0,
         },
       },
     });
-    return response.text;
+    const sum = response.text;
+    if(sum === 'SomethingsGoneWrongException') throw new Error();
+    else return sum;
   } catch (error) {
     return "요약에 실패했습니다.";
   }
