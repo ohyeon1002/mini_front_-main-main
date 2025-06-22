@@ -13,11 +13,6 @@ export default defineConfig(({ command:_command }) => ({
         target: 'https://openapi.naver.com',
         changeOrigin: true,
       },
-      '/api': {
-      target: 'http://localhost:5000',
-      changeOrigin: true,
-      rewrite: path => path.replace(/^\/api/, '')
-    }
     },
   },
 }))

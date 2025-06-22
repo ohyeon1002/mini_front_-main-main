@@ -3,6 +3,7 @@ import { type newsInfo } from "./NewsFetcher";
 
 interface dataProps {
   data: newsInfo;
+  thumbnail: string;
 }
 const apiurl = import.meta.env.VITE_API_URL;
 
