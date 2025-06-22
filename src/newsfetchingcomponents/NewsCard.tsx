@@ -24,14 +24,11 @@ export default function NewsCard({ data, thumbnail }: dataProps) {
       setLoading(true);
       setError(null);
 
-      const res = await fetch("http://localhost:5000/summarize", {
+      const res = await fetch("/api/summarize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          url: data.link,
-          length: "short",
-          style: "neutral",
-          use_ai: true,
+          link:data.link,
         }),
       });
 
