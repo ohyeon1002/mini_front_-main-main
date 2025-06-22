@@ -82,7 +82,7 @@ export default async function summaryHandler(request, response) {
     const doc = await getDoc(link);
     const article = getPureTxt(doc);
     const summary = await summarize(article);
-    return response.status(200).json({ summary: article });
+    return response.status(200).json({ summary: summary });
   } catch (error) {
     return response
       .status(500)
