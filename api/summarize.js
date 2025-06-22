@@ -1,5 +1,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
+import iconv from 'iconv-lite';
+import chardet from 'chardet';
 import { GoogleGenAI } from "@google/genai";
 
 const geminikey = import.meta.env.VITE_GEM_APIKEY;
