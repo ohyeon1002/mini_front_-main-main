@@ -75,6 +75,7 @@ export default function NewsFetcher({ uriEncodedString, pageSetter }: newsFetche
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
+              "ngrok-skip-browser-warning": "true",
       },
       body: JSON.stringify({
         username: userId,

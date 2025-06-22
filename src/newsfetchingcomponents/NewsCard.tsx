@@ -70,7 +70,8 @@ export default function NewsCard({ data }: dataProps) {
 
         const res = await fetch(`${apiurl}/api/liked`, {
           method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: token },
+          headers: { "Content-Type": "application/json", Authorization: token,
+              "ngrok-skip-browser-warning": "true", },
           body: JSON.stringify({
             username: userId,
             title: data.title,
@@ -94,6 +95,7 @@ export default function NewsCard({ data }: dataProps) {
             headers: {
               "Content-Type": "application/json",
               Authorization: token,
+              "ngrok-skip-browser-warning": "true",
             },
           }
         );
@@ -124,6 +126,7 @@ export default function NewsCard({ data }: dataProps) {
             headers: {
               "Content-Type": "application/json",
               Authorization: token,
+              "ngrok-skip-browser-warning": "true",
             },
           }
         );

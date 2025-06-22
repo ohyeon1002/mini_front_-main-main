@@ -44,6 +44,7 @@ export default function SearchHistoryFetcher({ pages, activeIndex, setActiveInde
           headers: {
             "Content-Type": "application/json",
             Authorization: token,
+              "ngrok-skip-browser-warning": "true",
           },
         });
 

@@ -38,6 +38,7 @@ export default function Scrap() {
           headers: {
             "Content-Type": "application/json",
             Authorization: token,
+              "ngrok-skip-browser-warning": "true",
           },
         }
       );
@@ -61,6 +62,7 @@ export default function Scrap() {
           method: "DELETE",
           headers: {
             Authorization: token,
+              "ngrok-skip-browser-warning": "true",
           },
         }
       );
