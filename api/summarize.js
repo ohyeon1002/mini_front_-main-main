@@ -4,7 +4,7 @@ import iconv from 'iconv-lite';
 import chardet from 'chardet';
 import { GoogleGenAI } from "@google/genai";
 
-const geminikey = import.meta.env.VITE_GEM_APIKEY;
+const geminikey = process.env.VITE_GEM_APIKEY;
 
 const getDoc = async (link) => {
   try {
