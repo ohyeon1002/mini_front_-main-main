@@ -56,10 +56,7 @@ export default function NewsCard({ data, thumbnail }: dataProps) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            url: data.link,
-            length: "short",
-            style: "neutral",
-            use_ai: true,
+            link:data.link,
           }),
         });
 
