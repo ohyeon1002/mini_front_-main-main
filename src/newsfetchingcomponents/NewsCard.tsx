@@ -52,7 +52,7 @@ export default function NewsCard({ data, thumbnail }: dataProps) {
 
     try {
       if (!scraped) {
-        const summaryRes = await fetch("http://localhost:5000/summarize", {
+        const summaryRes = await fetch("/api/summarize", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
