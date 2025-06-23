@@ -25,7 +25,7 @@ const getDoc = async (link) => {
   }
 };
 
-const getPureTxt = (doc) => {
+const getNews = (doc) => {
   try {
     const $ = cheerio.load(doc);
     const articleBody = $('div[itemprop="articleBody"]');
@@ -50,6 +50,18 @@ const getPureTxt = (doc) => {
     return "기사 추출 실패";
   }
 };
+
+const getNaver = (doc) => {
+  try{
+    const $ = cheerio.load(doc);
+    const pureTxtArr = $('div#newsct_article');
+    const textArray = pureTxtArr.map((index, element) => $(element).text().trim()).get();
+    const fullText = textArray.join("\n");
+    return fullText;
+  } catch (error) {
+    return "네이버 기사 추출 실패"
+  }
+}
 
 const ai = new GoogleGenAI({
   apiKey: geminikey,
@@ -82,8 +94,14 @@ export default async function summaryHandler(request, response) {
   const { link } = request.body;
   try {
     const doc = await getDoc(link);
-    const article = getPureTxt(doc);
-    const summary = await summarize(article);
+    let summary;
+    if(link.includes('news.naver.com')) {
+      const article = getNaver(doc);
+      summary = await summarize(article);
+    } else {
+      const article = getNews(doc);
+      summary = await summarize(article);
+    }
     return response.status(200).json({ summary: summary });
   } catch (error) {
     return response
