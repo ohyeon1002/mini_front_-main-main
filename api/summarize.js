@@ -94,14 +94,14 @@ export default async function summaryHandler(request, response) {
   const { link } = request.body;
   try {
     const doc = await getDoc(link);
-    let summary;
+    let article;
     if(link.includes('news.naver.com')) {
-      const article = getNaver(doc);
-      summary = await summarize(article);
+      article = getNaver(doc);
     } else {
-      const article = getNews(doc);
-      summary = await summarize(article);
+      article = getNews(doc);
     }
+    if(article.trim() === '') throw new Error();
+    const summary = await summarize(article);
     return response.status(200).json({ summary: summary });
   } catch (error) {
     return response
