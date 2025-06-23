@@ -145,7 +145,7 @@ export default function NewsCard({ data, thumbnail }: dataProps) {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 m-2 flex flex-col justify-between h-full">
       {/* 상단 내용 영역 */}
-      <div>
+      <div className="h-full">
         <div className="h-1/3 rounded-lg">
           <img src={thumbnail} className="w-full h-full object-cover" />
         </div>
