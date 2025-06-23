@@ -35,6 +35,7 @@ export default function LoginForm() {
   }
 };
 
+//src\components
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -64,10 +65,7 @@ export default function LoginForm() {
           로그인
         </button>
         <p className="text-sm mt-4 text-center">
-          계정이 없으신가요?{" "}
-          <a href="/signup" className="text-blue-500 hover:underline">
-            회원가입
-          </a>
+          뉴스포켓의 다양한 기능을 만나보세요!
         </p>
       </form>
     </div>

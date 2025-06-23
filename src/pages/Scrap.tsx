@@ -82,67 +82,65 @@ export default function Scrap() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="mb-4">
-        <button
-          onClick={() => navigate(-1)}
-          className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
-        >
-          뒤로가기
-        </button>
+  <div className="min-h-screen bg-gray-100 p-8">
+    {loading ? (
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <p className="text-gray-500 text-lg">스크랩된 뉴스를 불러오는 중...</p>
       </div>
-
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">
-        ❤️ 내가 스크랩한 뉴스
-      </h2>
-
-      
-      {!loading && !error && news.length === 0 && (
-        <p className="text-gray-400">스크랩한 뉴스가 없습니다.</p>
-      )}
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {news.map((item) => (
-          <div
-            key={item.id}
-            className="bg-white border rounded-lg p-4 shadow hover:shadow-md transition relative"
+    ) : (
+      <>
+        <div className="mb-4">
+          <button
+            onClick={() => navigate(-1)}
+            className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
           >
-            <a
-              href={item.originallink || item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-base font-semibold text-blue-700 hover:underline mb-2"
-            >
-              {item.title?.replace(/<b>/g, "").replace(/<\/b>/g, "")}
-            </a>
-            <p className="text-sm text-gray-600 mb-2">{item.pubDate}</p>
-            <p className="text-sm text-gray-700 whitespace-pre-line">
-              {item.summary || "요약 정보가 없습니다."}
-            </p>
+            뒤로가기
+          </button>
+        </div>
 
-            <button
-              onClick={() => handleDelete(item.id, item.link)}
-              className="absolute top-2 right-2 text-red-500 hover:text-red-700"
-              title="스크랩 해제"
-            >
-              ❌
-            </button>
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+          ❤️ 내가 스크랩한 뉴스
+        </h2>
+
+        {error && (
+          <p className="text-red-500 text-sm mb-4">{error}</p>
+        )}
+
+        {news.length === 0 ? (
+          <p className="text-gray-400">스크랩한 뉴스가 없습니다.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {news.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white border rounded-lg p-4 shadow hover:shadow-md transition relative"
+              >
+                <a
+                  href={item.originallink || item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-base font-semibold text-blue-700 hover:underline mb-2"
+                >
+                  {item.title?.replace(/<b>/g, "").replace(/<\/b>/g, "")}
+                </a>
+                <p className="text-sm text-gray-600 mb-2">{item.pubDate}</p>
+                <p className="text-sm text-gray-700 whitespace-pre-line">
+                  {item.summary || "요약 정보가 없습니다."}
+                </p>
+
+                <button
+                  onClick={() => handleDelete(item.id, item.link)}
+                  className="absolute top-2 right-2 text-red-500 hover:text-red-700"
+                  title="스크랩 해제"
+                >
+                  ❌
+                </button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
-  );
+        )}
+      </>
+    )}
+  </div>
+);
 }
-
-/*
-import { useNavigate } from "react-router-dom";
-
-const navigate = useNavigate();
-
-<button
-  onClick={() => navigate(-1)}
-  className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
->
-  ← 뒤로가기
-</button>
-*/

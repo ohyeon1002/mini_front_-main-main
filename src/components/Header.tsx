@@ -46,12 +46,7 @@ export default function Header() {
             >
               로그인
             </button>
-            <button
-              onClick={() => navigate("/signup")}
-              className="text-sm px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
-            >
-              회원가입
-            </button>
+            
           </>
         )}
       </div>
