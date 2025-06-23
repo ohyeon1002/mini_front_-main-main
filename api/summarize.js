@@ -70,7 +70,7 @@ const ai = new GoogleGenAI({
 const summarize = async (article) => {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-2.5-flash-lite-preview-06-17",
       contents: `Summarize the core point of the following news article in Korean in about 200 characters: ${article} \n If the article wasn't given, please let us know by returning 'SomethingsGoneWrongException'`,
       config: {
         thinkingConfig: {
