@@ -28,7 +28,7 @@ export default function NewsCard({ data, thumbnail }: dataProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          link:data.link,
+          link: data.link,
         }),
       });
 
@@ -56,7 +56,7 @@ export default function NewsCard({ data, thumbnail }: dataProps) {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            link:data.link,
+            link: data.link,
           }),
         });
 
@@ -65,8 +65,11 @@ export default function NewsCard({ data, thumbnail }: dataProps) {
 
         const res = await fetch(`${apiurl}/api/liked`, {
           method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: token,
-              "ngrok-skip-browser-warning": "true", },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+            "ngrok-skip-browser-warning": "true",
+          },
           body: JSON.stringify({
             username: userId,
             title: data.title,
@@ -84,7 +87,9 @@ export default function NewsCard({ data, thumbnail }: dataProps) {
         }
       } else {
         const res = await fetch(
-          `${apiurl}/api/liked?username=${userId}&link=${encodeURIComponent(data.link)}`,
+          `${apiurl}/api/liked?username=${userId}&link=${encodeURIComponent(
+            data.link
+          )}`,
           {
             method: "DELETE",
             headers: {
@@ -137,78 +142,83 @@ export default function NewsCard({ data, thumbnail }: dataProps) {
     checkScrap();
   }, [data.link]);
 
- return (
-  <div className="bg-white shadow-md rounded-lg p-4 m-2 flex flex-col justify-between h-full">
-    {/* 상단 내용 영역 */}
-    <div>
-      <img src={thumbnail}/>
-      <h2 className="text-lg font-semibold text-gray-800 mb-2">
-        <a
-          href={data.originallink || data.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-blue-600 underline"
-        >
-          {data.title.replace(/<b>/g, "").replace(/<\/b>/g, "").replace(/&quot;/g, '"')}
-        </a>
-      </h2>
-      <p className="text-sm text-gray-500 mb-2">{data.pubDate}</p>
-
-      {/* 요약 결과 */}
-      {loading && <p className="text-sm text-gray-500 mt-2">요약 중...</p>}
-      {error && (
-        <div className="mt-2 text-sm text-red-500">
-          {error}
-          <div className="mt-1">
-            <a
-              href={data.originallink || data.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-blue-600 underline hover:text-blue-800"
-            >
-              원문 보기
-            </a>
-          </div>
+  return (
+    <div className="bg-white shadow-md rounded-lg p-4 m-2 flex flex-col justify-between h-full">
+      {/* 상단 내용 영역 */}
+      <div>
+        <div className="h-3/7 rounded-lg overflow-hidden mb-2">
+          <img src={thumbnail} className="w-full h-full object-cover" />
         </div>
-      )}
-      {summary && (
-        <div className="mt-2 p-2 bg-gray-100 rounded text-sm text-gray-800 whitespace-pre-line">
-          <strong>요약:</strong> {summary}
-        </div>
-      )}
-    </div>
-
-    {/* 하단 버튼 영역 */}
-    <div className="mt-4 flex justify-between items-center">
-      <div className="flex gap-2">
-        <button
-          onClick={summarizeHandler}
-          className="text-sm bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
-        >
-          요약 보기
-        </button>
-        {(summary || error) && (
-          <button
-            onClick={() => {
-              setSummary(null);
-              setError(null);
-            }}
-            className="text-sm bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400 transition"
+        <h2 className="text-lg font-semibold text-gray-800 mb-2">
+          <a
+            href={data.originallink || data.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-600 underline"
           >
-            요약 닫기
-          </button>
+            {data.title
+              .replace(/<b>/g, "")
+              .replace(/<\/b>/g, "")
+              .replace(/&quot;/g, '"')}
+          </a>
+        </h2>
+        <p className="text-sm text-gray-500 mb-2">{data.pubDate}</p>
+
+        {/* 요약 결과 */}
+        {loading && <p className="text-sm text-gray-500 mt-2">요약 중...</p>}
+        {error && (
+          <div className="mt-2 text-sm text-red-500">
+            {error}
+            <div className="mt-1">
+              <a
+                href={data.originallink || data.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-blue-600 underline hover:text-blue-800"
+              >
+                원문 보기
+              </a>
+            </div>
+          </div>
+        )}
+        {summary && (
+          <div className="mt-2 p-2 bg-gray-100 rounded text-sm text-gray-800 whitespace-pre-line">
+            <strong>요약:</strong> {summary}
+          </div>
         )}
       </div>
 
-      {/* 하트 버튼 */}
-      <button
-        onClick={scrapHandler}
-        className="text-xl hover:scale-110 transition"
-        title={scraped ? "스크랩 해제" : "스크랩"}
-      >
-        {scraped ? "❤️" : "🤍"}
-      </button>
+      {/* 하단 버튼 영역 */}
+      <div className="mt-4 flex justify-between items-center">
+        <div className="flex gap-2">
+          <button
+            onClick={summarizeHandler}
+            className="text-sm bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
+          >
+            요약 보기
+          </button>
+          {(summary || error) && (
+            <button
+              onClick={() => {
+                setSummary(null);
+                setError(null);
+              }}
+              className="text-sm bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400 transition"
+            >
+              요약 닫기
+            </button>
+          )}
+        </div>
+
+        {/* 하트 버튼 */}
+        <button
+          onClick={scrapHandler}
+          className="text-xl hover:scale-110 transition"
+          title={scraped ? "스크랩 해제" : "스크랩"}
+        >
+          {scraped ? "❤️" : "🤍"}
+        </button>
+      </div>
     </div>
-  </div>
-);
+  );
 }

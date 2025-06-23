@@ -70,7 +70,7 @@ const ai = new GoogleGenAI({
 const summarize = async (article) => {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-2.5-flash-lite-preview-06-17",
       contents: `Summarize the core point of the following news article in Korean in about 200 characters: ${article} \n If the article wasn't given, please let us know by returning 'SomethingsGoneWrongException'`,
       config: {
         thinkingConfig: {
@@ -94,14 +94,14 @@ export default async function summaryHandler(request, response) {
   const { link } = request.body;
   try {
     const doc = await getDoc(link);
-    let summary;
+    let article;
     if(link.includes('news.naver.com')) {
-      const article = getNaver(doc);
-      summary = await summarize(article);
+      article = getNaver(doc);
     } else {
-      const article = getNews(doc);
-      summary = await summarize(article);
+      article = getNews(doc);
     }
+    // if(article.trim() === '') throw new Error();
+    const summary = await summarize(article);
     return response.status(200).json({ summary: summary });
   } catch (error) {
     return response
