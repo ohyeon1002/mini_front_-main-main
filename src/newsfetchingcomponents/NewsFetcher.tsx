@@ -43,7 +43,7 @@ export default function NewsFetcher({
     console.log("fetchHandler called");
     try {
       const resp: Response = await fetch(
-        `/v1/search/news.json?query=${uriEncodedString}&display=12`,
+        `/v1/search/news.json?query=${uriEncodedString}&display=6`,
         requestOptions
       );
       const jsn = await resp.json();

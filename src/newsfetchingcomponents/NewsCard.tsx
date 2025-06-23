@@ -147,7 +147,7 @@ export default function NewsCard({ data, thumbnail }: dataProps) {
       {/* 상단 내용 영역 */}
       <div>
         <div className="max-h-1/3 rounded-lg">
-          <img src={thumbnail} />
+          <img src={thumbnail} className="object-fill"/>
         </div>
         <h2 className="text-lg font-semibold text-gray-800 mb-2">
           <a
