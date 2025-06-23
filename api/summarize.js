@@ -100,7 +100,7 @@ export default async function summaryHandler(request, response) {
     } else {
       article = getNews(doc);
     }
-    if(article.trim() === '') throw new Error();
+    // if(article.trim() === '') throw new Error();
     const summary = await summarize(article);
     return response.status(200).json({ summary: summary });
   } catch (error) {
