@@ -146,9 +146,9 @@ export default function NewsCard({ data, thumbnail }: dataProps) {
     <div className="bg-white shadow-md rounded-lg p-4 m-2 flex flex-col justify-between h-full">
       {/* 상단 내용 영역 */}
       <div>
-        <div className="h-3/7 rounded-lg overflow-hidden mb-2">
+        {thumbnail && <div className="h-3/7 rounded-lg overflow-hidden mb-2">
           <img src={thumbnail} className="w-full h-full object-cover" />
-        </div>
+        </div>}
         <h2 className="text-lg font-semibold text-gray-800 mb-2">
           <a
             href={data.originallink || data.link}
